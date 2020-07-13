@@ -41,7 +41,7 @@ public class HelloWorldPrinter implements Printable, ActionListener {
     public int print(Graphics g, PageFormat pf, int page) throws
                                                         PrinterException {
 
-        if (page > 1) { /* We have only one page, and 'page' is zero-based */
+        if (page > 2) { /* We have only one page, and 'page' is zero-based */
             return NO_SUCH_PAGE;
         }
 
@@ -51,20 +51,28 @@ public class HelloWorldPrinter implements Printable, ActionListener {
         Graphics2D g2d = (Graphics2D)g;
         g2d.translate(pf.getImageableX(), pf.getImageableY());
 
+        if (page==0) {print1(g,pf,page);};
+        if (page==1) {print2(g,pf,page);};
+        if(page==2) {print3(g,pf,page);};
+        
         /* Now we perform our rendering */
-        g.drawString("Hello world!", 100, 100);
+        /*g.drawString("Hello world!", 100, 100);
 
         print2(g,pf,page);
-        g.drawString("print #2",100, 200);
-        if (page==1) {g.drawString("print #22",100, 400);}
+        g.drawString("print #2",100, 200);*/
+        //if (page==1) {g.drawString("print #22",100, 400);}
         /* tell the caller that this page is part of the printed document */
         return PAGE_EXISTS;
     }
-    
-    private void print2(Graphics g,PageFormat pf,int page) throws PrinterException {
-    	g.drawString("WRITE STRING", 100, 300);
+    private void print1(Graphics g,PageFormat pf,int page) throws PrinterException {
+    	g.drawString("1111111111", 100, 100);
     }
-
+    private void print2(Graphics g,PageFormat pf,int page) throws PrinterException {
+    	g.drawString("2222222222", 100, 100);
+    }
+    private void print3(Graphics g,PageFormat pf,int page) throws PrinterException {
+    	g.drawString("3333333333", 100, 100);
+    }
     public void actionPerformed(ActionEvent e) {
          PrinterJob job = PrinterJob.getPrinterJob();
          job.setPrintable(this);
